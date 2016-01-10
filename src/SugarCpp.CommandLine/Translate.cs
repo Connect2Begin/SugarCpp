@@ -53,6 +53,11 @@ namespace SugarCpp.CommandLine
             // multiple input file
             foreach (var fname in arguments.DirectArguments.Where(x => !x.StartsWith("-")))
             {
+                // skip not changed files from rebuild!
+                if (File.GetLastWriteTime(fname) <= File.GetLastWriteTime(Path.ChangeExtension(fname, "h"))
+                    && File.GetLastWriteTime(fname) <= File.GetLastWriteTime(Path.ChangeExtension(fname, "cpp")))
+                    continue; // alr
+                
                 string input = null;
                 try
                 {
