@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+	DefaultTargets="Compile">
+  <ItemGroup>
+    <PropertyPageSchema
+      Include="$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml" />
+    <AvailableItemName Include="SugarCppCompiler">
+      <Targets>_SugarCppCompiler</Targets>
+    </AvailableItemName>
+  </ItemGroup>
+  <UsingTask
+    TaskName="SugarCppCompiler"
+    TaskFactory="XamlTaskFactory"
+    AssemblyName="Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+  <Target
+    Name="_SugarCppCompiler"
+    BeforeTargets="$(SugarCppCompilerBeforeTargets)"
+    AfterTargets="$(SugarCppCompilerAfterTargets)"
+    Outputs="@(SugarCppCompiler-&gt;'%(Outputs)')"
+    DependsOnTargets="$(SugarCppCompilerDependsOn)"
+    Inputs="@(SugarCppCompiler);@(SugarCppCompiler->'%(AdditionalDependencies)')"
+    >
+    <SugarCppCompiler
+      CommandLineTemplate="%(SugarCppCompiler.CommandLineTemplate)"
+      AdditionalOptions="%(SugarCppCompiler.AdditionalOptions)"
+      Inputs="@(SugarCppCompiler)"
+      />
+    <ItemGroup>
+    	<FilesToCompile Include="*.sc" />
+	</ItemGroup>
+  </Target>
+  <Target
+    Name="ComputeSugarCppCompilerOutput">
+  </Target>
+</Project>
