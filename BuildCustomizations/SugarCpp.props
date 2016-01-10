@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SugarCppCompilerBeforeTargets>Midl</SugarCppCompilerBeforeTargets>
+    <SugarCppCompilerAfterTargets>CustomBuild</SugarCppCompilerAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SugarCppCompilerDependsOn>$(SugarCppCompilerDependsOn)</SugarCppCompilerDependsOn>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <SugarCppCompiler>
+      <TargetAssembly>$(TargetFileName)</TargetAssembly>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <CommandLineTemplate>D:\SugarCpp\SugarCpp.CommandLine.exe [AllOptions] [AdditionalOptions] [Inputs]</CommandLineTemplate>
+      <Outputs>%(TargetAssembly).h;%(TargetAssembly).cpp</Outputs>
+      <UseDefaultComponentModules>true</UseDefaultComponentModules>
+      <ExecutionDescription>Compiling SugarCpp...</ExecutionDescription>
+    </SugarCppCompiler>
+  </ItemDefinitionGroup>
+</Project>
