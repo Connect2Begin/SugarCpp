@@ -80,8 +80,12 @@ namespace SugarCpp.CommandLine
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Compile error with file: {0}", fname);
-                    Console.WriteLine(e.Message);
+                    //Console.WriteLine("Compile error with file: {0}", fname);
+                    //Console.WriteLine(e.Message);
+                    // Formatting the Output of a Custom Build Step or Build Event - according to this: https://msdn.microsoft.com/en-us/library/yxkt8b26.aspx
+                    foreach (var i in e.Message.Split('\n')
+                        .Select(j => new Regex(@"line ((\d+):(\d+))(.*)").Replace(j, fname + " ($2,$3) : error :$4")))
+                        Console.WriteLine(i);
                     return 1;
                 }
             }
