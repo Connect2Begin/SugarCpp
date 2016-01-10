@@ -130,20 +130,11 @@ namespace SugarCpp.CommandLine
 
                 if (printCode)
                 {
-                    //Console.WriteLine(result.Header);
+                    Console.WriteLine(result.Header);
 
-                    //Console.WriteLine();
+                    Console.WriteLine();
 
-                    //Console.WriteLine(result.Implementation);
-
-                    // Formatting the Output of a Custom Build Step or Build Event - according to this: https://msdn.microsoft.com/en-us/library/yxkt8b26.aspx
-                    Console.WriteLine("ERROR :");
-                    Console.WriteLine("ERROR : ----- GENERAL COMPILE ERROR!: ------------------------------------------------------");
-                    Console.WriteLine("ERROR :");
-                    foreach (var i in new object[]{result.Header, result.Implementation}
-                        .SelectMany(s => (s ?? "").ToString().Split(new string[]{"\r\n"}, StringSplitOptions.None))
-                        .Where(s => !String.IsNullOrEmpty(s)))
-                        Console.WriteLine("ERROR : {0}", i);
+                    Console.WriteLine(result.Implementation);
                 }
 
                 File.WriteAllText(header_name, result.Header);
