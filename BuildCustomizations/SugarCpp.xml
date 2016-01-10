@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectSchemaDefinitions xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <Rule
+    Name="SugarCppCompiler"
+    PageTemplate="tool"
+    DisplayName="SugarCpp Compiler"
+    Order="200">
+    <Rule.DataSource>
+      <DataSource
+        Persistence="ProjectFile"
+        ItemType="SugarCppCompiler" />
+    </Rule.DataSource>
+    <Rule.Categories>
+      <Category
+        Name="General">
+        <Category.DisplayName>
+          <sys:String>General</sys:String>
+        </Category.DisplayName>
+      </Category>
+    </Rule.Categories>
+  </Rule>
+  <ItemType
+    Name="SugarCppCompiler"
+    DisplayName="SugarCpp Compiler" />
+  <FileExtension
+    Name="*.sc"
+    ContentType="SugarCppCompiler" />
+  <ContentType
+    Name="SugarCppCompiler"
+    DisplayName="SugarCpp Compiler"
+    ItemType="SugarCppCompiler" />
+</ProjectSchemaDefinitions>
