@@ -83,7 +83,7 @@ namespace SugarCpp.CommandLine
                     //Console.WriteLine("Compile error with file: {0}", fname);
                     //Console.WriteLine(e.Message);
                     // Formatting the Output of a Custom Build Step or Build Event - according to this: https://msdn.microsoft.com/en-us/library/yxkt8b26.aspx
-                    foreach (var i in e.Message.Split('\n')
+                    foreach (var i in e.Message.Split(new string[]{"\r\n"}, StringSplitOptions.None)
                         .Select(j => new Regex(@"line ((\d+):(\d+))(.*)").Replace(j, fname + " ($2,$3) : error :$4")))
                         Console.WriteLine(i);
                     return 1;
@@ -130,11 +130,20 @@ namespace SugarCpp.CommandLine
 
                 if (printCode)
                 {
-                    Console.WriteLine(result.Header);
+                    //Console.WriteLine(result.Header);
 
-                    Console.WriteLine();
+                    //Console.WriteLine();
 
-                    Console.WriteLine(result.Implementation);
+                    //Console.WriteLine(result.Implementation);
+
+                    // Formatting the Output of a Custom Build Step or Build Event - according to this: https://msdn.microsoft.com/en-us/library/yxkt8b26.aspx
+                    Console.WriteLine("ERROR :");
+                    Console.WriteLine("ERROR : ----- GENERAL COMPILE ERROR!: ------------------------------------------------------");
+                    Console.WriteLine("ERROR :");
+                    foreach (var i in new object[]{result.Header, result.Implementation}
+                        .SelectMany(s => (s ?? "").ToString().Split(new string[]{"\r\n"}, StringSplitOptions.None))
+                        .Where(s => !String.IsNullOrEmpty(s)))
+                        Console.WriteLine("ERROR : {0}", i);
                 }
 
                 File.WriteAllText(header_name, result.Header);
