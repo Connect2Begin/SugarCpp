@@ -17,7 +17,25 @@
           <sys:String>General</sys:String>
         </Category.DisplayName>
       </Category>
+      <Category
+        Name="Command Line"
+        Subtype="CommandLine">
+        <Category.DisplayName>
+          <sys:String>Command Line</sys:String>
+        </Category.DisplayName>
+      </Category>
     </Rule.Categories>
+    <StringProperty
+      Name="Inputs"
+      Category="Command Line"
+      IsRequired="true">
+      <StringProperty.DataSource>
+        <DataSource
+          Persistence="ProjectFile"
+          ItemType="SugarCpp"
+          SourceType="Item" />
+      </StringProperty.DataSource>
+    </StringProperty>
   </Rule>
   <ItemType
     Name="SugarCppCompiler"
